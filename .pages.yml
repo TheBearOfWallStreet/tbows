@@ -1,0 +1,51 @@
+# Pages CMS config (https://pagescms.org) — the recommended visual editor.
+# No server to run: connect this repo at app.pagescms.org, sign in with GitHub, and Justin
+# edits posts in a visual editor that commits straight to the repo. Adjust field syntax to
+# Pages CMS's current docs if a field name differs.
+media:
+  input: assets/blog
+  output: /assets/blog
+
+content:
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: _posts
+    filename: '{year}-{month}-{day}-{fields.title|slugify}.md'
+    view:
+      fields: [title, date, category]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Publish date
+        type: date
+        options: { format: 'yyyy-MM-dd' }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Announcements, Trade Breakdown, Weekly Recap, Process, Video Recap]
+      - name: readtime
+        label: Read time
+        type: string
+        default: '3 min read'
+      - name: author
+        label: Author
+        type: string
+        default: Justin
+      - name: description
+        label: SEO description
+        type: text
+        description: One or two sentences — shows in Google results and link previews.
+      - name: image
+        label: Cover image (optional)
+        type: image
+      - name: body
+        label: Body
+        type: rich-text

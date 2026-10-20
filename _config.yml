@@ -1,0 +1,36 @@
+title: The Bear of Wall Street
+description: >-
+  Trade breakdowns, weekly market recaps, and written lessons on short-side
+  small-cap trading from The Bear of Wall Street. Educational only, not investment advice.
+url: https://thebearofwallstreet.com
+author: Justin — The Bear of Wall Street
+lang: en
+timezone: America/New_York
+
+# Posts live at thebearofwallstreet.com/blog/<post-title>/  (clean, SEO-friendly URLs)
+permalink: /blog/:title/
+
+# GitHub Pages-supported plugins (no action needed — they run automatically on Pages)
+plugins:
+  - jekyll-seo-tag     # per-page <title>, meta description, Open Graph, Twitter cards, canonical
+  - jekyll-sitemap     # auto-generates /sitemap.xml for Google
+
+# Every post uses the branded post layout automatically
+twitter:
+  card: summary_large_image
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Don't publish these to the live site
+exclude:
+  - LAUNCH.md
+  - README.md
+  - DEPLOY-BLOG.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

@@ -1,11 +1,21 @@
+---
+title: Blog
+description: Trade breakdowns, weekly market recaps, and written lessons on short-side small-cap trading from The Bear of Wall Street. Educational only, not investment advice.
+---
 <!DOCTYPE html><html lang=en data-theme=dark><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Blog &mdash; The Bear of Wall Street</title>
-<meta name=description content="Trade breakdowns, weekly market recaps, and written lessons on short-side small-cap trading from The Bear of Wall Street. Educational only, not investment advice.">
-<link rel=canonical href="https://www.thebearofwallstreet.com/blog.html">
-<meta property="og:title" content="The Bear of Wall Street — Blog">
-<meta property="og:description" content="Trade breakdowns, weekly market recaps, and written lessons on short-side small-cap trading.">
-<meta property="og:type" content="website">
+{% seo %}
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B0B0B">
+{% unless page.image %}<meta property="og:image" content="{{ '/og-image.png' | absolute_url }}"><meta name="twitter:image" content="{{ '/og-image.png' | absolute_url }}">{% endunless %}
+<!-- GA4: uncomment + add Measurement ID when ready
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel=stylesheet>
 <style>
 :root{--black:#0B0B0B;--bg:#0a0a09;--g1:#EADFC2;--g2:#D6C2A1;--g3:#BFA679;--ink:#E9E6DF;--muted:#8f8b82;--line:rgba(214,194,161,.14);--panel:#121110;--burg:#7A1E1E}
@@ -42,14 +52,14 @@ footer a{color:var(--muted)}footer a:hover{color:var(--g1)}
 @media(max-width:560px){nav .right a.muted{display:none}}
 </style>
 </head><body>
-<div class=ribbon>3-Day Free Access to the Community &middot; <a href="https://whop.com/@thebearofwallstreet/" target=_blank rel=noopener>Join Now &rarr;</a></div>
+<div class=ribbon>3-Day Free Access to the Community &middot; <a href="https://whop.com/the-bear-of-wall-street/products" target=_blank rel=noopener>Join Now &rarr;</a></div>
 <nav>
-  <a href="index.html" class=brand>THE BEAR OF WALL STREET</a>
+  <a href="/" class=brand>THE BEAR OF WALL STREET</a>
   <div class=right>
-    <a class=muted href="index.html">Home</a>
-    <a class=muted href="index.html#content">Content</a>
+    <a class=muted href="/">Home</a>
+    <a class=muted href="/#content">Content</a>
     <a class=muted href="https://www.youtube.com/@thebearofwall-street" target=_blank rel=noopener>YouTube</a>
-    <a class=np href="https://whop.com/@thebearofwallstreet/" target=_blank rel=noopener>Join Now</a>
+    <a class=np href="https://whop.com/the-bear-of-wall-street/products" target=_blank rel=noopener>Join Now</a>
   </div>
 </nav>
 
@@ -60,46 +70,30 @@ footer a{color:var(--muted)}footer a:hover{color:var(--g1)}
 </div></header>
 
 <main class=wrap>
-  <div class=grid id=grid></div>
+  {% if site.posts.size > 0 %}
+  <div class=grid>
+    {% for post in site.posts %}
+    <a class=card href="{{ post.url }}"><div class=body>
+      <span class=cat>{{ post.category | default: "Journal" }}</span>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.description | default: post.excerpt | strip_html | truncate: 150 }}</p>
+      <div class=meta><span>{{ post.date | date: "%B %-d, %Y" }}</span><span>&middot;</span><span>{{ post.readtime | default: "3 min read" }}</span></div>
+      <span class=arrow>Read &rarr;</span>
+    </div></a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class=empty>First posts are on the way. Check back soon.</div>
+  {% endif %}
 </main>
 
 <footer><div class=wrap>
   <div class=row>
     <div>&copy; 2026 The Bear of Wall Street &middot; Educational only, not investment advice.</div>
     <div style="display:flex;gap:18px">
-      <a href="index.html">Home</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a>
+      <a href="/">Home</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
     </div>
   </div>
   <p class=disc>TBOWS content is for education only and is not investment advice. Trading is risky and you can lose some or all of your money. You are responsible for your own trades. Past performance does not guarantee future results.</p>
 </div></footer>
-
-<script>
-/* ---- POSTS: newest first. Add a new object at the top for each post. ---- */
-/* A YouTube-recap bot can append entries here and drop a matching file in /posts/. */
-var POSTS=[
-  {
-    title:"Welcome to the TBOWS Blog",
-    excerpt:"What this blog is for, how often it'll post, and why writing trades down is part of the process.",
-    date:"September 29, 2026",
-    category:"Announcements",
-    readtime:"2 min read",
-    url:"posts/welcome-to-the-tbows-blog.html"
-  }
-];
-
-var grid=document.getElementById('grid');
-if(!POSTS.length){
-  grid.parentNode.innerHTML='<div class=empty>First posts are on the way. Check back soon.</div>';
-}else{
-  grid.innerHTML=POSTS.map(function(p){
-    return '<a class=card href="'+p.url+'"><div class=body>'
-      +'<span class=cat>'+p.category+'</span>'
-      +'<h2>'+p.title+'</h2>'
-      +'<p>'+p.excerpt+'</p>'
-      +'<div class=meta><span>'+p.date+'</span><span>&middot;</span><span>'+p.readtime+'</span></div>'
-      +'<span class=arrow>Read &rarr;</span>'
-      +'</div></a>';
-  }).join('');
-}
-</script>
 </body></html>
